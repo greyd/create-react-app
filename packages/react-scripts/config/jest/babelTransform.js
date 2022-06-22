@@ -9,6 +9,7 @@
 'use strict';
 
 const babelJest = require('babel-jest').default;
+const useBabelrc = process.env.ENABLE_BABELRC === 'true';
 
 const hasJsxRuntime = (() => {
   if (process.env.DISABLE_NEW_JSX_TRANSFORM === 'true') {
@@ -32,6 +33,6 @@ module.exports = babelJest.createTransformer({
       },
     ],
   ],
-  babelrc: false,
+  babelrc: useBabelrc,
   configFile: false,
 });

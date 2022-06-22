@@ -30,6 +30,7 @@ const publicUrlOrPath = getPublicUrlOrPath(
 );
 
 const buildPath = process.env.BUILD_PATH || 'build';
+const htmlPath = process.env.HTML_PATH || 'public/index.html';
 
 const moduleFileExtensions = [
   'web.mjs',
@@ -64,7 +65,7 @@ module.exports = {
   appPath: resolveApp('.'),
   appBuild: resolveApp(buildPath),
   appPublic: resolveApp('public'),
-  appHtml: resolveApp('public/index.html'),
+  appHtml: resolveApp(htmlPath),
   appIndexJs: resolveModule(resolveApp, 'src/index'),
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),
@@ -89,7 +90,7 @@ module.exports = {
   appPath: resolveApp('.'),
   appBuild: resolveApp(buildPath),
   appPublic: resolveApp('public'),
-  appHtml: resolveApp('public/index.html'),
+  appHtml: resolveApp(htmlPath),
   appIndexJs: resolveModule(resolveApp, 'src/index'),
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),

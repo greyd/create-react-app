@@ -60,6 +60,7 @@ const shouldInlineRuntimeChunk = process.env.INLINE_RUNTIME_CHUNK !== 'false';
 
 const emitErrorsAsWarnings = process.env.ESLINT_NO_DEV_ERRORS === 'true';
 const disableESLintPlugin = process.env.DISABLE_ESLINT_PLUGIN === 'true';
+const useBabelrc = process.env.ENABLE_BABELRC === 'true';
 
 const imageInlineSizeLimit = parseInt(
   process.env.IMAGE_INLINE_SIZE_LIMIT || '10000'
@@ -299,7 +300,9 @@ module.exports = function (webpackEnv) {
           },
         }),
         // This is only used in production mode
-        new CssMinimizerPlugin(),
+        new CssMinimizerPlugin({
+          warningsFilter: () => false,
+        }),
       ],
     },
     resolve: {
@@ -430,7 +433,7 @@ module.exports = function (webpackEnv) {
                   ],
                 ],
                 // @remove-on-eject-begin
-                babelrc: false,
+                babelrc: useBabelrc,
                 configFile: false,
                 // Make sure we have a unique cache identifier, erring on the
                 // side of caution.
@@ -470,7 +473,7 @@ module.exports = function (webpackEnv) {
               exclude: /@babel(?:\/|\\{1,2})runtime/,
               loader: require.resolve('babel-loader'),
               options: {
-                babelrc: false,
+                babelrc: useBabelrc,
                 configFile: false,
                 compact: false,
                 presets: [
